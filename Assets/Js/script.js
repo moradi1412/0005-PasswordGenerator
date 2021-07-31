@@ -1,130 +1,75 @@
-// const randomfunction = {
-//   upper: getUpper, 
-//   lower: getRandomLower,
-//   number: getRandomNumber,
-//   symbol: getrandomsymbol
-// }; 
+//Declaration of variables 
+var number = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"];
+var specialChar = ["!", "%", "&", ",", "*", "+", "-", ".", "/", "<", ">", "?", "~"];
+var alphaLower = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
+var alphaUpper = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"];
 
-//Asking user for length & returning the length 
-function lengthPass (){ 
-  var lengthPass = window.prompt ("please enter the length of password you want to generate"); 
-  return lengthPass; 
-} 
-//log to test 
-console.log(lengthPass()); 
+function promptlengthUser (){ 
+  var lengthPass = window.prompt("please enter the length of password you want to generate");
+  while (lengthPass <= 1 || lengthPass >= 128) {
+  var lengthPass = window.prompt("password length must be between 1 to 128 ");
+  }
+  return lengthPass;
+}
 
-//prompt function and boolean return 
-function promptUpper (){
-  var confirmUpper = window.confirm ("do you want to include uppercase letter"); 
+function promptParameter(){  
+  var confirmUpper = window.confirm("do you want to include uppercase letter");
+  var confirmlower = window.confirm("do you want to include lower letter");
+  var confirmNumber = window.confirm("do you want to have numbers within");
+  var confirmSymbol = window.confirm("do you want to include symbols");
+
+  while (confirmUpper === false && confirmlower === false && confirmNumber === false && confirmSymbol === false) {
+
+    window.alert("you must choose at least one parameters")
+    var confirmUpper = window.confirm("do you want to include uppercase letter");
+    var confirmlower = window.confirm("do you want to include lower letter");
+    var confirmNumber = window.confirm("do you want to have numbers within");
+    var confirmSymbol = window.confirm("do you want to include symbols");
+  }
+
+  //including characters based on cofirming with user into one array 
+  var securePass = [];
   if (confirmUpper) {
-    return true
+    securePass = securePass.concat(alphaUpper);
   }
-  else {
-    return false;
-  }
-}; 
-console.log (promptUpper()); 
-
-function promptLower (){
-  var confirmlower = window.confirm ("do you want to include lower letter"); 
   if (confirmlower) {
-    return true
+    securePass = securePass.concat(alphaLower);
   }
-  else {
-    return false;
-  }
-}; 
-console.log (promptLower());
-
-function promptNumber (){
-  var confirmNumber = window.confirm ("do you want to have numbers within");  
   if (confirmNumber) {
-    return true
+    securePass = securePass.concat(number);
   }
-  else {
-    return false;
-  }
-}; 
-console.log (promptNumber());
-
-function promptsymbol (){
-  var confirmSymbol = window.confirm ("do you want to include symbols"); 
   if (confirmSymbol) {
-    return true
+    securePass = securePass.concat(specialChar);
   }
-  else {
-    return false;
+  return securePass; 
+  console.log(securePass);
+  // end including characters based on cofirming with user into one array 
+}
+
+//creating the password 
+function generatePassword() {
+  //input validation for parameters 
+  var passlength = promptlengthUser (); 
+  var passwordArray = promptParameter (); 
+
+  var randomPass = "";
+  //create random securepassword base on length 
+  for (var index = 0; index < passlength; index++) {
+    randomPass = randomPass + passwordArray[Math.floor(Math.random() * passwordArray.length)];
+    console.log(randomPass);
   }
-}; 
-console.log (promptsymbol());
-
-//getting these function from Character Char Code 
-//generator Functions - wants the number from (97-122) for lower case 
-function getRandomLower() {
-  getRandomLower = String.fromCharCode(Math.floor((Math.random () * 26) + 97 ));
-  return getRandomLower; 
+  return randomPass;
 };
-
-//generator Functions - wants the number from (65-90) for upper case 
-function getUpper() {
-  getUpper = String.fromCharCode(Math.floor((Math.random () * 26) + 65 ));
-  return getUpper; 
-};
-
-//generator Functions - wants the number from (48-57) for number
-function getRandomNumber() {
-  getRandomNumber = String.fromCharCode(Math.floor((Math.random () * 10) + 48 ));
-  return getRandomNumber; 
-};
-
-function getrandomsymbol(){
-  const symbols =  "!#$%&()*+,-./:;<=>?@[]^_`{|}~"; 
-  return symbols[Math.floor(math.random() * symbols.length)];  
-};
+// console.log(generatePassword());
 
 
+// Write password to the #password input
+function writePassword() {
+  var password = generatePassword();
+  var passwordText = document.querySelector("#password");
+  passwordText.value = password;
+}
 
-function generatePassword () {
-  
-  for (var index = 0; index < 10 ; index++) {
-    
-    var number = Math.floor(Math.random() * 10) + 1 ;  
-  }
-  return number; 
-}; 
-
-console.log(generatePassword());
-
-
-
-
-
-
-// //console.log (getrandomsymbol());
-
-// function generatePassword(); 
-// var generatePassword = ''; 
-// 
-//
-
-
-
-
-
-
-
-
-// // // Assignment Code
-// // var generateBtn = document.querySelector("#generate");
-
-// // Write password to the #password input
-// function writePassword() {
-//  var password = generatePassword();
-//  var passwordText = document.querySelector("#password");
-
-// //   passwordText.value = password;
-
-// // }
-
-// // // Add event listener to generate button
-// // generateBtn.addEventListener("click", writePassword);
+//Add event listener to generate button
+var generateBtn = document.querySelector("#generate");
+generateBtn.addEventListener("click", writePassword);
