@@ -1,10 +1,19 @@
+// const randomfunction = {
+//   upper: getUpper, 
+//   lower: getRandomLower,
+//   number: getRandomNumber,
+//   symbol: getrandomsymbol
+// }; 
+
 //Asking user for length & returning the length 
 function lengthPass (){ 
   var lengthPass = window.prompt ("please enter the length of password you want to generate"); 
   return lengthPass; 
 } 
+//log to test 
 console.log(lengthPass()); 
 
+//prompt function and boolean return 
 function promptUpper (){
   var confirmUpper = window.confirm ("do you want to include uppercase letter"); 
   if (confirmUpper) {
@@ -49,44 +58,47 @@ function promptsymbol (){
 }; 
 console.log (promptsymbol());
 
+//getting these function from Character Char Code 
+//generator Functions - wants the number from (97-122) for lower case 
+function getRandomLower() {
+  getRandomLower = String.fromCharCode(Math.floor((Math.random () * 26) + 97 ));
+  return getRandomLower; 
+};
+
+//generator Functions - wants the number from (65-90) for upper case 
+function getUpper() {
+  getUpper = String.fromCharCode(Math.floor((Math.random () * 26) + 65 ));
+  return getUpper; 
+};
+
+//generator Functions - wants the number from (48-57) for number
+function getRandomNumber() {
+  getRandomNumber = String.fromCharCode(Math.floor((Math.random () * 10) + 48 ));
+  return getRandomNumber; 
+};
+
+function getrandomsymbol(){
+  const symbols =  "!#$%&()*+,-./:;<=>?@[]^_`{|}~"; 
+  return symbols[Math.floor(math.random() * symbols.length)];  
+};
+
+
+
+function generatePassword () {
+  
+  for (var index = 0; index < 10 ; index++) {
+    
+    var number = Math.floor(Math.random() * 10) + 1 ;  
+  }
+  return number; 
+}; 
+
+console.log(generatePassword());
 
 
 
 
 
-
-
-
-// const randomfunction = {
-//   upper: getUpper, 
-//   lower: getRandomLower,
-//   number: getRandomNumber,
-//   symbol: getrandomsymbol
-// }; 
-
-// //getting these function from Character Char Code 
-// //generator Functions - wants the number from (97-122) for lower case 
-// function getRandomLower() {
-//   getRandomLower = String.fromCharCode(Math.floor((Math.random () * 26) + 97 ));
-//   return getRandomLower; 
-// }
-
-// //generator Functions - wants the number from (65-90) for upper case 
-// function getUpper() {
-//   getUpper = String.fromCharCode(Math.floor((Math.random () * 26) + 65 ));
-//   return getUpper; 
-// }
-
-// //generator Functions - wants the number from (48-57) for number
-// function getRandomNumber() {
-//   getRandomNumber = String.fromCharCode(Math.floor((Math.random () * 10) + 48 ));
-//   return getRandomNumber; 
-// }
-
-// function getrandomsymbol(){
-//   const symbols =  "!#$%&()*+,-./:;<=>?@[]^_`{|}~"; 
-//   return symbols[Math.floor(math.random() * symbols.length)];  
-// }
 
 // //console.log (getrandomsymbol());
 
